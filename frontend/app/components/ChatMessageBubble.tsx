@@ -301,16 +301,18 @@ export function ChatMessageBubble(props: {
       )}
 
       {isUser ? (
-        <Heading size="lg" fontWeight="medium" color="white">
+        <Heading size="md" fontWeight="medium" color="black" className="flex flex-row">
+          <img src="/images/user-icon.jpeg" className=" h-12 pr-2 rounded-full" />
           {content}
         </Heading>
       ) : (
-        <Box className="whitespace-pre-wrap" color="white">
+        <Box className="whitespace-pre-wrap flex flex-row" color="black">
+          <img src="/images/bot-icon.jpeg" className=" h-12 pr-2 rounded-full" />
           {answerElements}
         </Box>
       )}
 
-      {props.message.role !== "user" &&
+      {/* {props.message.role !== "user" &&
         props.isMostRecent &&
         props.messageCompleted && (
           <HStack spacing={2}>
@@ -364,9 +366,9 @@ export function ChatMessageBubble(props: {
               🦜🛠️ View trace
             </Button>
           </HStack>
-        )}
+        )} */}
 
-      {!isUser && <Divider mt={4} mb={4} />}
+      {!isUser && <Divider mt={4} mb={4} borderColor={"#0000008a"} />}
     </VStack>
   );
 }

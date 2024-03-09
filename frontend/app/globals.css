@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-  color: #f8f8f8;
-  background: #131318;
+  color: black;
+  background: hsl(0, 0%, 97%);
 }
 
 body input,
@@ -30,4 +30,30 @@ code {
 
 li {
   padding: 4px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  border-radius: 3px;
+  display: block;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4f3422;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3b3b;
+  cursor: pointer;
 }

@@ -21,8 +21,9 @@ import {
   InputGroup,
   InputRightElement,
   Spinner,
+  background,
 } from "@chakra-ui/react";
-import { ArrowUpIcon } from "@chakra-ui/icons";
+import { ArrowUpIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { Select, Link } from "@chakra-ui/react";
 import { Source } from "./SourceBubble";
 import { apiBaseUrl } from "../utils/constants";
@@ -99,7 +100,7 @@ export function ChatWindow(props: { conversationId: string }) {
         validLanguage || "plaintext",
         code,
       ).value;
-      return `<pre class="highlight bg-gray-700" style="padding: 5px; border-radius: 5px; overflow: auto; overflow-wrap: anywhere; white-space: pre-wrap; max-width: 100%; display: block; line-height: 1.2"><code class="${language}" style="color: #d6e2ef; font-size: 12px; ">${highlightedCode}</code></pre>`;
+      return `<pre class="highlight bg-gray-700" style="padding: 5px; border-radius: 5px; overflow: auto; overflow-wrap: anywhere; black-space: pre-wrap; max-width: 100%; display: block; line-height: 1.2"><code class="${language}" style="color: #d6e2ef; font-size: 12px; ">${highlightedCode}</code></pre>`;
     };
     marked.setOptions({ renderer });
     try {
@@ -111,16 +112,16 @@ export function ChatWindow(props: { conversationId: string }) {
           timeout: 60000,
         },
       });
-      const llmDisplayName = llm ?? "openai_gpt_3_5_turbo";
+      const llmDisplayName = "openai_gpt_3_5_turbo";
       const streamLog = await remoteChain.streamLog(
         {
-          question: messageValue,
-          chat_history: chatHistory,
+          query: messageValue,
+          messages: chatHistory,
         },
         {
-          configurable: {
-            llm: llmDisplayName,
-          },
+          // configurable: {
+          //   llm: llmDisplayName,
+          // },
           tags: ["model:" + llmDisplayName],
           metadata: {
             conversation_id: conversationId,
@@ -208,132 +209,135 @@ export function ChatWindow(props: { conversationId: string }) {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 rounded grow max-h-full">
-      <Flex
-        direction={"column"}
-        alignItems={"center"}
-        marginTop={messages.length > 0 ? "" : "64px"}
-      >
-        <Heading
-          fontSize={messages.length > 0 ? "2xl" : "3xl"}
-          fontWeight={"medium"}
-          mb={1}
-          color={"white"}
+    <div className="h-full">
+      <ArrowBackIcon className=" absolute h-full w-full top-8 left-6" />
+      <div className=" h-full flex flex-col items-center py-8 px-5 lg:px-60 rounded grow max-h-full justify-between	">
+        <Flex
+          direction={"column"}
+          alignItems={"center"}
+          marginTop={messages.length > 0 ? "" : "64px"}
         >
-          Chat LangChain 🦜🔗
-        </Heading>
-        {messages.length > 0 ? (
-          <Heading fontSize="md" fontWeight={"normal"} mb={1} color={"white"}>
-            We appreciate feedback!
-          </Heading>
-        ) : (
           <Heading
-            fontSize="xl"
-            fontWeight={"normal"}
-            color={"white"}
-            marginTop={"10px"}
-            textAlign={"center"}
+            fontSize={messages.length > 0 ? "2xl" : "3xl"}
+            fontWeight={"medium"}
+            mb={1}
+            color={"black"}
           >
-            Ask me anything about LangChain&apos;s{" "}
-            <Link href="https://python.langchain.com/" color={"blue.200"}>
-              Python documentation!
-            </Link>
+            🫂 Fine Guy 🫂
           </Heading>
-        )}
-        <div className="text-white flex flex-wrap items-center mt-4">
-          <div className="flex items-center mb-2">
-            <span className="shrink-0 mr-2">Powered by</span>
-            {llmIsLoading ? (
-              <Spinner className="my-2"></Spinner>
-            ) : (
-              <Select
-                value={llm}
-                onChange={(e) => {
-                  insertUrlParam("llm", e.target.value);
-                  setLlm(e.target.value);
-                }}
-                width={"240px"}
-              >
-                <option value="openai_gpt_3_5_turbo">GPT-3.5-Turbo</option>
-                <option value="anthropic_claude_2_1">Claude-2.1</option>
-                <option value="google_gemini_pro">Google Gemini Pro</option>
-                <option value="fireworks_mixtral">
-                  Mixtral (via Fireworks.ai)
-                </option>
-                <option value="cohere_command">Cohere</option>
-              </Select>
-            )}
-          </div>
+          {messages.length > 0 ? (
+            <Heading fontSize="md" fontWeight={"normal"} mb={1} color={"black"}>
+            </Heading>
+          ) : (
+            <Heading
+              fontSize="xl"
+              fontWeight={"normal"}
+              color={"#0000008a"}
+              marginTop={"10px"}
+              textAlign={"center"}
+            >
+              Tell me how's your feeling today!{" "}
+              {/* <Link href="https://python.langchain.com/" color={"blue.200"}>
+                Python documentation!
+              </Link> */}
+            </Heading>
+          )}
+          {/* <div className="text-black flex flex-wrap items-center mt-4">
+            <div className="flex items-center mb-2">
+              <span className="shrink-0 mr-2">Powered by</span>
+              {llmIsLoading ? (
+                <Spinner className="my-2"></Spinner>
+              ) : (
+                <Select
+                  value={llm}
+                  onChange={(e) => {
+                    insertUrlParam("llm", e.target.value);
+                    setLlm(e.target.value);
+                  }}
+                  width={"240px"}
+                >
+                  <option value="openai_gpt_3_5_turbo">GPT-3.5-Turbo</option>
+                  <option value="anthropic_claude_2_1">Claude-2.1</option>
+                  <option value="google_gemini_pro">Google Gemini Pro</option>
+                  <option value="fireworks_mixtral">
+                    Mixtral (via Fireworks.ai)
+                  </option>
+                  <option value="cohere_command">Cohere</option>
+                </Select>
+              )}
+            </div>
+          </div> */}
+        </Flex>
+        <div
+          className="flex flex-col-reverse w-full mb-2 overflow-auto overflow-x-hidden"
+          ref={messageContainerRef}
+        >
+          {messages.length > 0 ? (
+            [...messages]
+              .reverse()
+              .map((m, index) => (
+                <ChatMessageBubble
+                  key={m.id}
+                  message={{ ...m }}
+                  aiEmoji="🦜"
+                  isMostRecent={index === 0}
+                  messageCompleted={!isLoading}
+                ></ChatMessageBubble>
+              ))
+          ) : (
+            <EmptyState onChoice={sendInitialQuestion} />
+          )}
         </div>
-      </Flex>
-      <div
-        className="flex flex-col-reverse w-full mb-2 overflow-auto"
-        ref={messageContainerRef}
-      >
-        {messages.length > 0 ? (
-          [...messages]
-            .reverse()
-            .map((m, index) => (
-              <ChatMessageBubble
-                key={m.id}
-                message={{ ...m }}
-                aiEmoji="🦜"
-                isMostRecent={index === 0}
-                messageCompleted={!isLoading}
-              ></ChatMessageBubble>
-            ))
-        ) : (
-          <EmptyState onChoice={sendInitialQuestion} />
-        )}
-      </div>
-      <InputGroup size="md" alignItems={"center"}>
-        <AutoResizeTextarea
-          value={input}
-          maxRows={5}
-          marginRight={"56px"}
-          placeholder="What does RunnablePassthrough.assign() do?"
-          textColor={"white"}
-          borderColor={"rgb(58, 58, 61)"}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              sendMessage();
-            } else if (e.key === "Enter" && e.shiftKey) {
-              e.preventDefault();
-              setInput(input + "\n");
-            }
-          }}
-        />
-        <InputRightElement h="full">
-          <IconButton
-            colorScheme="blue"
-            rounded={"full"}
-            aria-label="Send"
-            icon={isLoading ? <Spinner /> : <ArrowUpIcon />}
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              sendMessage();
+        <InputGroup size="md" alignItems={"center"}>
+          <AutoResizeTextarea
+            style={{ borderRadius: "1.25rem" }}
+            value={input}
+            maxRows={5}
+            marginRight={"56px"}
+            placeholder="Share with me!"
+            textColor={"black"}
+            borderColor={"rgb(58, 58, 61)"}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+              } else if (e.key === "Enter" && e.shiftKey) {
+                e.preventDefault();
+                setInput(input + "\n");
+              }
             }}
           />
-        </InputRightElement>
-      </InputGroup>
+          <InputRightElement h="full">
+            <IconButton
+              background="#4f3422"
+              rounded={"full"}
+              aria-label="Send"
+              icon={isLoading ? <Spinner /> : <ArrowUpIcon color={"#ffffff"} />}
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                sendMessage();
+              }}
+            />
+          </InputRightElement>
+        </InputGroup>
 
-      {messages.length === 0 ? (
-        <footer className="flex justify-center absolute bottom-8">
-          <a
-            href="https://github.com/langchain-ai/chat-langchain"
-            target="_blank"
-            className="text-white flex items-center"
-          >
-            <img src="/images/github-mark.svg" className="h-4 mr-1" />
-            <span>View Source</span>
-          </a>
-        </footer>
-      ) : (
-        ""
-      )}
+        {/* {messages.length === 0 ? (
+          <footer className="flex justify-center absolute bottom-8">
+            <a
+              href="https://github.com/langchain-ai/chat-langchain"
+              target="_blank"
+              className="text-black flex items-center"
+            >
+              <img src="/images/github-mark.svg" className="h-4 mr-1" />
+              <span>View Source</span>
+            </a>
+          </footer>
+        ) : (
+          ""
+        )} */}
+      </div>
     </div>
   );
 }

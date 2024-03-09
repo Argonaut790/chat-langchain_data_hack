@@ -18,20 +18,20 @@ export function EmptyState(props: { onChoice: (question: string) => any }) {
         <Card
           onMouseUp={handleClick}
           width={"48%"}
-          backgroundColor={"rgb(58, 58, 61)"}
-          _hover={{ backgroundColor: "rgb(78,78,81)" }}
+          backgroundColor={"#ffffff"}
+          _hover={{ backgroundColor: "#ffffff" }}
           cursor={"pointer"}
           justifyContent={"center"}
         >
           <CardHeader justifyContent={"center"}>
             <Heading
-              fontSize="lg"
+              fontSize="md"
               fontWeight={"medium"}
               mb={1}
-              color={"gray.200"}
+              color={"gray.700"}
               textAlign={"center"}
             >
-              How do I use a RecursiveUrlLoader to load content from a page?
+              Today is a new day, and I'm excited to share my positivity!
             </Heading>
           </CardHeader>
         </Card>
@@ -39,20 +39,20 @@ export function EmptyState(props: { onChoice: (question: string) => any }) {
         <Card
           onMouseUp={handleClick}
           width={"48%"}
-          backgroundColor={"rgb(58, 58, 61)"}
-          _hover={{ backgroundColor: "rgb(78,78,81)" }}
+          backgroundColor={"#ffffff"}
+          _hover={{ backgroundColor: "#ffffff" }}
           cursor={"pointer"}
           justifyContent={"center"}
         >
           <CardHeader justifyContent={"center"}>
             <Heading
-              fontSize="lg"
+              fontSize="md"
               fontWeight={"medium"}
               mb={1}
-              color={"gray.200"}
+              color={"gray.700"}
               textAlign={"center"}
             >
-              What does RunnablePassthrough.assign() do?
+              I want to share a recent moment of happiness that made my day.
             </Heading>
           </CardHeader>
         </Card>
@@ -61,20 +61,20 @@ export function EmptyState(props: { onChoice: (question: string) => any }) {
         <Card
           onMouseUp={handleClick}
           width={"48%"}
-          backgroundColor={"rgb(58, 58, 61)"}
-          _hover={{ backgroundColor: "rgb(78,78,81)" }}
+          backgroundColor={"#ffffff"}
+          _hover={{ backgroundColor: "#ffffff" }}
           cursor={"pointer"}
           justifyContent={"center"}
         >
           <CardHeader justifyContent={"center"}>
             <Heading
-              fontSize="lg"
+              fontSize="md"
               fontWeight={"medium"}
               mb={1}
-              color={"gray.200"}
+              color={"gray.700"}
               textAlign={"center"}
             >
-              Explain multi-vector retrieval and how it can improve results.
+              Got a burst of inspiration and wanted to share it with you!
             </Heading>
           </CardHeader>
         </Card>
@@ -82,20 +82,20 @@ export function EmptyState(props: { onChoice: (question: string) => any }) {
         <Card
           onMouseUp={handleClick}
           width={"48%"}
-          backgroundColor={"rgb(58, 58, 61)"}
-          _hover={{ backgroundColor: "rgb(78,78,81)" }}
+          backgroundColor={"#ffffff"}
+          _hover={{ backgroundColor: "#ffffff" }}
           cursor={"pointer"}
           justifyContent={"center"}
         >
           <CardHeader justifyContent={"center"}>
             <Heading
-              fontSize="lg"
+              fontSize="md"
               fontWeight={"medium"}
               mb={1}
-              color={"gray.200"}
+              color={"gray.700"}
               textAlign={"center"}
             >
-              How do I run a model locally on my laptop with Ollama?
+              Feeling uplifted and ready to share some positivity!
             </Heading>
           </CardHeader>
         </Card>
